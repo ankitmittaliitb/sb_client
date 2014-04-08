@@ -1,12 +1,9 @@
 <html>
   <head>
-    <title>Social Billboard</title>
+      <title>Social Billboard</title>
   </head>
   <body>
-  	{% for tweet in tweet_list %}
- 		<p><b>{{tweet.posted_by}}</b></p> at <p>{{tweet.occured_at}}</p>
- 		<p>{{tweet.tweet}}</p>
- 		<br>
- 	{% endfor%}
-</body>
+     <p><b>{{data.posted_by}}</b></p>posted at <p>{{data.occured_at}}</p>
+     <p>{{data.tweet}}</p>     
+  </body>
 </html>
