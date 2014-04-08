@@ -1,5 +1,5 @@
 import datetime
-from config import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_KEY, ACCESS_SECRET
+from config import CONSUMER_KEY, CONSUMER_SECRET
 
 from birdy.twitter import AppClient
 from app import app
