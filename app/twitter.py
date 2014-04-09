@@ -30,22 +30,19 @@ def get_new_tweets():
 		response = client.api.search.tweets.get(q = query, count = 100)
 		statuses += response.data.statuses
 	
-	latest_tweets = 0
 	for status in statuses:
-		if not db.session.query(TweetInfo).filter(TweetInfo.domain_id == status.id_str).count():  #check whether a tweet is already present in the DataBase
+		#check whether a tweet is already present in the DataBase
+		if not db.session.query(TweetInfo).filter(TweetInfo.domain_id == status.id_str).count():  
 			created_at = datetime.datetime.strptime(status.created_at, r"%a %b %d %H:%M:%S +0000 %Y")
-			o = TweetInfo(tweet = status.text,
+			tweet_object = TweetInfo(tweet = status.text,
 						posted_by = '{} ({})'.format(status.user.screen_name,
 							status.user.followers_count),
 						recorded_at = datetime.datetime.now(),
 						occured_at = created_at,
 						domain_id = status.id_str)
-			latest_tweets += 1
-			db.session.add(o)
+			db.session.add(tweet_object)
 	db.session.commit()
-	new_tweets = latest_tweets > 0 
-	return new_tweets
-
+	
 				
 
 

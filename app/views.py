@@ -13,7 +13,7 @@ def before_first_request():
 
 @app.route('/')
 def index():
-	get_new_tweets()	
+	get_new_tweets()	#logic moved to cron 
 	tweets = fetch_tweets()  
 	#data = create_dictionary(tweets)
 	data = {}
