@@ -1,10 +1,17 @@
 import datetime
-from config import CONSUMER_KEY, CONSUMER_SECRET
+#from config import CONSUMER_KEY, CONSUMER_SECRET
 
 from birdy.twitter import AppClient
 from app import app
 from app import db
 from models import TweetInfo 
+
+from utils import check_duplication
+
+#
+
+CONSUMER_KEY = 'mj0yYgt80jiUQHShwdhpR0snT'
+CONSUMER_SECRET = 'TwjxzYXi0butJ0dfICJdVqnlh5e32w5j3iyfH2C1QboDV8EA19'
 
 #Create an instance of appclient for the application
 client = AppClient(CONSUMER_KEY, CONSUMER_SECRET)
@@ -20,10 +27,7 @@ QUERIES = ['#Vespa', '@Vespa']
 def get_new_tweets():
 	"""Return number of tweets if any and save them in Database"""
 	#TODO
-	#My gut says that this for loop is an unneccessary overhead and can be significantly cut down 
-	#if I do a db call here to get the occured_at of the last entry in the list and then do the twitter 
-	#api call for only the statuses that have occured post the last entry as the last entry would anyway be the 
-	#latest entry in the app. Will work on this tomorrow.
+	#This parameter can be used to fetch tweets based on a given date 
 	#parameter -> until
 	statuses = [] 
 	for query in QUERIES:			
@@ -32,14 +36,16 @@ def get_new_tweets():
 	
 	for status in statuses:
 		#check whether a tweet is already present in the DataBase
-		if not db.session.query(TweetInfo).filter(TweetInfo.domain_id == status.id_str).count():  
+		tweet_count = check_duplication(status.id_str)
+		if not tweet_count:  
 			created_at = datetime.datetime.strptime(status.created_at, r"%a %b %d %H:%M:%S +0000 %Y")
 			tweet_object = TweetInfo(tweet = status.text,
 						posted_by = '{} ({})'.format(status.user.screen_name,
 							status.user.followers_count),
 						recorded_at = datetime.datetime.now(),
 						occured_at = created_at,
-						domain_id = status.id_str)
+						domain_id = status.id_str,
+						profile_image_url = status.user.profile_image_url)
 			db.session.add(tweet_object)
 	db.session.commit()
 	

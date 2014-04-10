@@ -18,6 +18,7 @@ class TweetInfo(db.Model):
 	occured_at = db.Column(db.DateTime, default = datetime.datetime.now)
 	published = db.Column(db.SmallInteger, default = TWEET_UNPUBLISHED)
 	priority = db.Column(db.SmallInteger, default = DEFAULT_PRIORITY)
+	profile_image_url = db.Column(db.String)
 
 	"""String representation of tweet_info"""
 	def __str__(self):
