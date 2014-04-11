@@ -24,7 +24,9 @@ python virtualenv.py flask
 #4. Add the file app/db_fetch.py to cron do:
 
 -> open cron using crontab -e 
+
 ->  */2 * * * * /sb_client/db_fetch.py
+
 -> save the file.
     
     
