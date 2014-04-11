@@ -20,5 +20,11 @@ python virtualenv.py flask
     v. flask/bin/pip install pytz==2013b
     vi. flask/bin/pip install flup
     vii. flask/bin/pip install birdy
+
+#4. Add the file app/db_fetch.py to cron do:
+
+-> open cron using crontab -e 
+->  */2 * * * * /sb_client/db_fetch.py
+-> save the file.
     
     
