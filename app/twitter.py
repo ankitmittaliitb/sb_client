@@ -1,5 +1,5 @@
 import datetime
-#from config import CONSUMER_KEY, CONSUMER_SECRET
+from config import CONSUMER_KEY, CONSUMER_SECRET, SAVED_ACCESS_TOKEN
 
 from birdy.twitter import AppClient
 from app import app
@@ -8,14 +8,8 @@ from models import TweetInfo
 
 from utils import check_duplication
 
-#
-
-CONSUMER_KEY = 'mj0yYgt80jiUQHShwdhpR0snT'
-CONSUMER_SECRET = 'TwjxzYXi0butJ0dfICJdVqnlh5e32w5j3iyfH2C1QboDV8EA19'
-
 #Create an instance of appclient for the application
-client = AppClient(CONSUMER_KEY, CONSUMER_SECRET)
-access_token = client.get_access_token()
+client = AppClient(CONSUMER_KEY, CONSUMER_SECRET, SAVED_ACCESS_TOKEN)
 
 #Add the keywords here which need to be searched over Twitter
 QUERIES = ['#Vespa', '@Vespa']
