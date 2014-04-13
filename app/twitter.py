@@ -1,5 +1,5 @@
 import datetime
-from config import CONSUMER_KEY, CONSUMER_SECRET, SAVED_ACCESS_TOKEN
+from config import TW_CONSUMER_KEY, TW_CONSUMER_SECRET, TW_SAVED_ACCESS_TOKEN, QUERIES
 
 from birdy.twitter import AppClient
 from app import app
@@ -9,10 +9,7 @@ from models import TweetInfo
 from utils import check_duplication
 
 #Create an instance of appclient for the application
-client = AppClient(CONSUMER_KEY, CONSUMER_SECRET, SAVED_ACCESS_TOKEN)
-
-#Add the keywords here which need to be searched over Twitter
-QUERIES = ['#Vespa', '@Vespa']
+client = AppClient(TW_CONSUMER_KEY, TW_CONSUMER_SECRET, TW_SAVED_ACCESS_TOKEN)
 
 #We can also restrict things based on the geo like you mentioned using the longitude and latitude
 #parameter -> geo

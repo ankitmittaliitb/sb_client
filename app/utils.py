@@ -1,9 +1,9 @@
 from app import db
 from models import TweetInfo, TWEET_PUBLISHED, TWEET_UNPUBLISHED
 
-def get_max_id():	
+def get_max_id(object_name):	
 	"""Returns the current max id of the tweets in the db"""
-	query = db.session.query(db.func.max(TweetInfo.id).label("max_id"))
+	query = db.session.query(db.func.max(object_name.id).label("max_id"))
 	result = query.first()
 	max = result.max_id
 	return max
@@ -25,10 +25,10 @@ def clear_publishing_history():
 
 	db.session.commit()
 
-def check_duplication(tweet_id):
-	"""Method that returns if the current tweet is already present in DataBase or not"""
-	tweet_count = db.session.query(TweetInfo).filter(TweetInfo.domain_id == tweet_id).count()
-	return tweet_count
+def check_duplication(object_id, object_name):
+	"""Method that returns if the current object is already present in DataBase or not"""
+	object_count = db.session.query(object_name).filter(object_name.domain_id == object_id).count()
+	return object_count
 
 
 

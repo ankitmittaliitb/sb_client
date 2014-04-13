@@ -24,6 +24,22 @@ class TweetInfo(db.Model):
 	def __str__(self):
 		return '<Tweet %r>' % (self.id)
 
+class InstagramInfo(db.Model):
+	"""Stores information about the instagram pictures that are fetched by the API call"""
+	id = db.Column(db.Integer, primary_key = True, autoincrement = True)
+	domain_id = db.Column(db.String)
+	instagram_image_url = db.Column(db.String)
+	posted_by = db.Column(db.String)
+	recorded_at = db.Column(db.DateTime, default = datetime.datetime.now)
+	occured_at = db.Column(db.DateTime, default = datetime.datetime.now)
+	published = db.Column(db.SmallInteger, default = TWEET_UNPUBLISHED)
+	priority = db.Column(db.SmallInteger, default = DEFAULT_PRIORITY)
+	profile_image_url = db.Column(db.String)
+
+	"""String representation of instagram_info"""
+	def __str__(self):
+		return '<Picture %r>' % (self.instagram_image_url)	
+
 		
 
 	
